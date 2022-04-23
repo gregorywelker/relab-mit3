@@ -26,14 +26,14 @@ public class RunStatechart {
 		while(scanner.hasNext()) {
 			print(s);
 			switch(scanner.next()) {
-			case "start":
-				s.raiseStart();
+			case "startModified":
+				s.raiseStartModified();
 				break;
-			case "white":
-				s.raiseWhite();
+			case "whiteModified":
+				s.raiseWhiteModified();
 				break;
-			case "black":
-				s.raiseBlack();
+			case "blackModified":
+				s.raiseBlackModified();
 				break;
 			case "exit":
 				scanner.close();
@@ -42,25 +42,10 @@ public class RunStatechart {
 			}
 			s.runCycle();
 		}
-		
-
-		/*
-		s.init();
-		s.enter();
-		s.runCycle();
-		print(s);
-		s.raiseStart();
-		s.runCycle();
-		System.in.read();
-		s.raiseWhite();
-		s.runCycle();
-		print(s);
-		System.exit(0);
-		*/
 	}
-
 	public static void print(IExampleStatemachine s) {
-		System.out.println("W = " + s.getSCInterface().getWhiteTime());
-		System.out.println("B = " + s.getSCInterface().getBlackTime());
+		System.out.println("whiteTime = " + s.getSCInterface().getWhiteTime());
+		System.out.println("blackTime = " + s.getSCInterface().getBlackTime());
+		System.out.println("randomVar = " + s.getSCInterface().getRandomVar());
 	}
 }

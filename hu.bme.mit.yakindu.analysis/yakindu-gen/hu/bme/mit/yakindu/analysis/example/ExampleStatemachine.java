@@ -6,22 +6,22 @@ import hu.bme.mit.yakindu.analysis.ITimer;
 public class ExampleStatemachine implements IExampleStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
-		private boolean start;
+		private boolean startModified;
 		
-		public void raiseStart() {
-			start = true;
+		public void raiseStartModified() {
+			startModified = true;
 		}
 		
-		private boolean white;
+		private boolean whiteModified;
 		
-		public void raiseWhite() {
-			white = true;
+		public void raiseWhiteModified() {
+			whiteModified = true;
 		}
 		
-		private boolean black;
+		private boolean blackModified;
 		
-		public void raiseBlack() {
-			black = true;
+		public void raiseBlackModified() {
+			blackModified = true;
 		}
 		
 		private long whiteTime;
@@ -44,10 +44,20 @@ public class ExampleStatemachine implements IExampleStatemachine {
 			this.blackTime = value;
 		}
 		
+		private long randomVar;
+		
+		public long getRandomVar() {
+			return randomVar;
+		}
+		
+		public void setRandomVar(long value) {
+			this.randomVar = value;
+		}
+		
 		protected void clearEvents() {
-			start = false;
-			white = false;
-			black = false;
+			startModified = false;
+			whiteModified = false;
+			blackModified = false;
 		}
 	}
 	
@@ -87,6 +97,8 @@ public class ExampleStatemachine implements IExampleStatemachine {
 		sCInterface.setWhiteTime(60);
 		
 		sCInterface.setBlackTime(60);
+		
+		sCInterface.setRandomVar(0);
 	}
 	
 	public void enter() {
@@ -203,16 +215,16 @@ public class ExampleStatemachine implements IExampleStatemachine {
 		return sCInterface;
 	}
 	
-	public void raiseStart() {
-		sCInterface.raiseStart();
+	public void raiseStartModified() {
+		sCInterface.raiseStartModified();
 	}
 	
-	public void raiseWhite() {
-		sCInterface.raiseWhite();
+	public void raiseWhiteModified() {
+		sCInterface.raiseWhiteModified();
 	}
 	
-	public void raiseBlack() {
-		sCInterface.raiseBlack();
+	public void raiseBlackModified() {
+		sCInterface.raiseBlackModified();
 	}
 	
 	public long getWhiteTime() {
@@ -229,6 +241,14 @@ public class ExampleStatemachine implements IExampleStatemachine {
 	
 	public void setBlackTime(long value) {
 		sCInterface.setBlackTime(value);
+	}
+	
+	public long getRandomVar() {
+		return sCInterface.getRandomVar();
+	}
+	
+	public void setRandomVar(long value) {
+		sCInterface.setRandomVar(value);
 	}
 	
 	/* Entry action for state 'Black'. */
@@ -329,7 +349,7 @@ public class ExampleStatemachine implements IExampleStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.start) {
+				if (sCInterface.startModified) {
 					exitSequence_main_region_Init();
 					enterSequence_main_region_White_default();
 				} else {
@@ -345,7 +365,7 @@ public class ExampleStatemachine implements IExampleStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.black) {
+				if (sCInterface.blackModified) {
 					exitSequence_main_region_Black();
 					enterSequence_main_region_White_default();
 				} else {
@@ -368,7 +388,7 @@ public class ExampleStatemachine implements IExampleStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.white) {
+				if (sCInterface.whiteModified) {
 					exitSequence_main_region_White();
 					enterSequence_main_region_Black_default();
 				} else {

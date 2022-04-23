@@ -80,7 +80,7 @@ public class Main {
 				EventDefinition event = (EventDefinition) content;
 				System.out.println(
 				"			case " + '"' + event.getName() + '"' + ":\n" + 
-				"				s.raise" + event.getName().substring(0,1).toUpperCase() + event.getName().substring(1) +"()"+ "\n"+
+				"				s.raise" + event.getName().substring(0,1).toUpperCase() + event.getName().substring(1) +"();"+ "\n"+
 				"				break;"
 				);
 			}
@@ -103,7 +103,7 @@ public class Main {
 			EObject content = iterator.next();
 			if(content instanceof VariableDefinition) {
 				VariableDefinition variable = (VariableDefinition) content;
-				System.out.println( "		System.out.println(" + '"' + variable.getName() + " =" + '"' + " + s.getSCInterface()." + "get" + variable.getName().substring(0,1).toUpperCase() + variable.getName().substring(1) + "());");
+				System.out.println( "		System.out.println(" + '"' + variable.getName() + " = " + '"' + " + s.getSCInterface()." + "get" + variable.getName().substring(0,1).toUpperCase() + variable.getName().substring(1) + "());");
 			}
 		}
 	
